@@ -1,0 +1,38 @@
+jpeg("tobacco_smoking_forest.jpg",
+     width = 4000,
+     height = 8500,
+     res = 300)
+
+par(mar = c(5, 12, 5, 2))
+
+forest(
+  meta_tobacco_smoking,
+  
+  fontsize = 16,
+  
+  spacing = 1.4,    
+  
+  comb.fixed = FALSE,
+  comb.random = TRUE,
+  
+  backtransf = TRUE,
+  
+  leftcols = c("studlab", "event", "n"),
+  leftlabs = c("Author/Year/Country", "Cases", "Sample size"),
+  
+  rightcols = c("effect", "ci"),
+  rightlabs = c("Prevalence", "95% CI"),
+  
+  print.random = TRUE,
+  print.fixed = FALSE,
+  
+  print.I2 = TRUE,
+  print.tau2 = TRUE,
+  print.pval.Q = TRUE,
+  
+  prediction = TRUE,
+  
+  xlab = "Prevalence of Tobacco Smoking (%)"
+)
+
+dev.off()
