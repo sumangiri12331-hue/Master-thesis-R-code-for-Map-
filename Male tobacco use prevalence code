@@ -1,0 +1,14 @@
+library(meta)
+
+meta_male <- metaprop(
+  event = Male_prevalence$`Male cases`,
+  n = Male_prevalence$`Male sample size (row specific)`,
+  studlab = Male_prevalence$`Author/Year/Country/Substance or Age`,
+  data = Male_prevalence,
+  sm = "PFT",
+  method.tau = "DL",
+  random = TRUE
+)
+
+summary(meta_male)
+forest(meta_male)
