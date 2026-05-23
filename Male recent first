@@ -1,0 +1,25 @@
+pdf("Male_Tobacco_ForestPlot.pdf", width = 10, height = 14)
+
+forest(
+  meta_male,
+  
+  comb.fixed = FALSE,
+  comb.random = TRUE,
+  
+  backtransf = TRUE,
+  
+  fontsize = 10,
+  spacing = 1.1,
+  
+  print.I2 = TRUE,
+  print.tau2 = TRUE,
+  print.pval.Q = TRUE,
+  prediction = TRUE,
+  
+  leftcols = c("studlab", "event", "n"),
+  rightcols = c("effect", "ci"),
+  
+  xlab = "Male Tobacco Use Prevalence (%)"
+)
+
+dev.off()
