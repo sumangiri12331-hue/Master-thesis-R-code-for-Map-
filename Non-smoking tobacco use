@@ -1,0 +1,23 @@
+library(meta)
+
+meta_non_smoking <- metaprop(
+  event = Non_smoking_tobacco$`No. of Cases (Prevalence X total sample size)`,
+  n = Non_smoking_tobacco$`Row specific sample size`,
+  studlab = Non_smoking_tobacco$`Author/Year/Country/Substance or Age`,
+  data = Non_smoking_tobacco,
+  sm = "PFT",
+  method.tau = "DL",
+  random = TRUE,
+  common = FALSE
+)
+
+par(mar = c(5, 12, 5, 2))
+
+forest(meta_non_smoking,
+       fontsize = 12,
+       leftcols = c("studlab", "event", "n"),
+       leftlabs = c("Study", "Cases", "Sample size"),
+       print.random = TRUE,
+       print.fixed = FALSE,
+       print.I2 = TRUE,
+       print.pval.Q = TRUE)
