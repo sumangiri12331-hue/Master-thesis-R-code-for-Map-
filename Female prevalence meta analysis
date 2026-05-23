@@ -1,0 +1,56 @@
+library(meta)
+
+# Sort recent studies first
+Female_prevalence <- Female_prevalence[
+  order(
+    as.numeric(sub(".*([0-9]{4}).*", "\\1",
+                   Female_prevalence$`Author/Year/Country/Substance or Age`)),
+    decreasing = TRUE
+  ),
+]
+
+# Meta-analysis
+meta_female <- metaprop(
+  event = Female_prevalence$`Female cases`,
+  n = Female_prevalence$`Female sample size (row specific)`,
+  
+  studlab = Female_prevalence$`Author/Year/Country/Substance or Age`,
+  
+  data = Female_prevalence,
+  
+  sm = "PFT",
+  method.tau = "DL",
+  random = TRUE,
+  common = FALSE,
+  
+  backtransf = TRUE
+)
+
+# Summary
+summary(meta_female)
+
+# Forest plot
+forest(
+  meta_female,
+  
+  comb.fixed = FALSE,
+  comb.random = TRUE,
+  
+  backtransf = TRUE,
+  
+  fontsize = 11,
+  spacing = 1.4,
+  
+  print.I2 = TRUE,
+  print.tau2 = TRUE,
+  print.pval.Q = TRUE,
+  prediction = TRUE,
+  
+  leftcols = c("studlab", "event", "n"),
+  leftlabs = c("Author/Year/Country", "Cases", "Sample size"),
+  
+  rightcols = c("effect", "ci"),
+  rightlabs = c("Prevalence", "95% CI"),
+  
+  xlab = "Female Tobacco Use Prevalence (%)"
+)
