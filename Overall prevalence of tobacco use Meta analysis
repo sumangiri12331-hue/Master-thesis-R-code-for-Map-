@@ -1,0 +1,22 @@
+jpeg("tobacco_last_30_days_forest.jpg",
+     width = 5500,   # 👈 increased one step
+     height = 6500,
+     res = 300)
+
+par(mar = c(5, 12, 5, 2))
+
+forest(meta_tobacco_30,
+       
+       fontsize = 15,
+       spacing = 1.2,
+       
+       leftcols = c("studlab", "event", "n"),
+       leftlabs = c("Author/Year/Country", "Cases", "Sample size"),
+       
+       print.random = TRUE,
+       print.fixed = FALSE,
+       
+       print.I2 = TRUE,
+       print.pval.Q = TRUE)
+
+dev.off()
