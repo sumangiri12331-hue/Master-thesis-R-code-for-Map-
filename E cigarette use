@@ -1,0 +1,58 @@
+library(meta)
+
+# Sort recent studies first
+E_cigarette_use <- E_cigarette_use[
+  order(
+    as.numeric(sub(".*([0-9]{4}).*", "\\1",
+                   E_cigarette_use$`Author/Year/Country/Substance or Age`)),
+    decreasing = TRUE
+  ),
+]
+
+# Meta-analysis
+meta_ecig <- metaprop(
+  
+  event = E_cigarette_use$`No. of Cases (Prevalence X total sample size)`,
+  
+  n = E_cigarette_use$`Row specific sample size`,
+  
+  studlab = E_cigarette_use$`Author/Year/Country/Substance or Age`,
+  
+  data = E_cigarette_use,
+  
+  sm = "PFT",
+  method.tau = "DL",
+  random = TRUE,
+  common = FALSE,
+  
+  backtransf = TRUE
+)
+
+# Summary
+summary(meta_ecig)
+
+# Forest plot
+forest(
+  meta_ecig,
+  
+  comb.fixed = FALSE,
+  comb.random = TRUE,
+  
+  backtransf = TRUE,
+  
+  fontsize = 11,
+  spacing = 1.4,
+  
+  print.I2 = TRUE,
+  print.tau2 = TRUE,
+  print.pval.Q = TRUE,
+  prediction = TRUE,
+  
+  leftcols = c("studlab", "event", "n"),
+  leftlabs = c("Author/Year/Country", "Cases", "Sample size"),
+  
+  rightcols = c("effect", "ci"),
+  rightlabs = c("Prevalence", "95% CI"),
+  
+  xlab = "E-Cigarette Use Prevalence (%)"
+)
