@@ -1,0 +1,24 @@
+> # Forest plot
+> forest(
++     meta_non_smoking,
++     
++     comb.fixed = FALSE,
++     comb.random = TRUE,
++     
++     backtransf = TRUE,
++     
++     fontsize = 11,
++     spacing = 1.4,
++     
++     print.I2 = TRUE,
++     print.tau2 = TRUE,
++     print.pval.Q = TRUE,
++     prediction = TRUE,
++     
++     leftcols = c("studlab", "event", "n"),
++     leftlabs = c("Author/Year/Country", "Cases", "Sample size"),
++     
++     rightcols = c("effect", "ci"),
++     rightlabs = c("Prevalence", "95% CI"),
++     
++     xlab = "Non-Smoking Tobacco Use Prevalence (%)"
