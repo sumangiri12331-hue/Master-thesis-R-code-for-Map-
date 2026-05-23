@@ -1,0 +1,22 @@
+library(meta)
+
+meta_female <- metaprop(
+  event = Female_prevalence$`Female cases`,
+  n = Female_prevalence$`Female sample size (row specific)`,
+  studlab = Female_prevalence$`Author/Year/Country/Substance or Age`,
+  data = Female_prevalence,
+  sm = "PFT",
+  method.tau = "DL",
+  random = TRUE,
+  common = FALSE
+)
+
+summary(meta_female)
+
+forest(meta_female,
+       fontsize = 13,
+       leftcols = c("studlab", "event", "n"),
+       leftlabs = c("Author/Year/Country", "Cases", "Sample size"),
+       print.random = TRUE,
+       print.fixed = FALSE,
+       print.I2 = TRUE)
